@@ -3,12 +3,16 @@ import re
 def ofecha(string):
     return re.sub('[^\d]','/',string)
 
-def separamiles(numero):
-    ptos=(len(numero)-1)/3 #si el numero 1000, retorna 1, si es 1000000 devuelve 2
-    i=1
-    while ptos>0:
-
-
+def separamiles(numero): #12,345,678
+    numero=numero[::-1]
+    lista= re.findall("\d{3}", numero)
+    reem="".join(lista)
+    if len(reem)!=len(numero):
+        string=numero.replace(reem,"")
+        lista.append(string)
+    fin = ".".join(lista)
+    fin=fin[::-1]
+    return fin
 
 
 def sep(archivo):
@@ -35,6 +39,4 @@ miles='(^.|\s)(\d+)(^.|\s)'
 su.close()
 
 print ofecha('21;12!2014')
-print separamiles('12345678')
-raw_input("Cualquier tecla para salir:\n")
-exit()
+print separamiles('10000000000000000')
