@@ -1,29 +1,40 @@
 import re
 
-def ofecha(fecha): #revisa el string y lo devuelve con el formato dd/mm/aaaas
-    busqueda=re.findall('[^\d]',fecha)
-    print busqueda
-    f=fecha.strip().split(busqueda[0])
-    if busqueda[0]!=busqueda[1]:
-        sep=f[1].strip().split(busqueda[1])
-        f[1]=sep[0]
-        f.append(sep[1])
-    string="/".join(f)
-    return string
+def ofecha(string):
+    return re.sub('[^\d]','/',string)
 
-def separamiles(mil):
-    l1=[] #chica
-    lg=[] #grande
-    n=len(mil)
-    while n!=0:
-        return None
+def separamiles(numero):
+    ptos=(len(numero)-1)/3 #si el numero 1000, retorna 1, si es 1000000 devuelve 2
+    i=1
+    while ptos>0:
 
 
 
 
+def sep(archivo):
+    print "Comprobando sintaxis de funciones \separamiles{} y \ofecha"
+    sm=False
+    of=False
+    patron=re.compile(r'\\separamiles{}')
+    pat=re.compile('ofecha{}')
+    for linea in archivo:
+        #print linea
+        if (patron.match(linea))!=None:
+            sm=True
+        elif (pat.match(linea))!=None:
+            of=True
 
-suertex=open("suertex.txt","r")
+    return
 
-print ofecha('12-12!1234')
+#######################
 
+su=open("suertex.txt","r")
+sep(su)
+fecha='(^.|\s)([0-2][0-9]|3[01]).(0?[0-9]|1[0-2]).[0-9][0-9][0-9][0-9](^.|\s)' #search para fecha
+miles='(^.|\s)(\d+)(^.|\s)'
+su.close()
 
+print ofecha('21;12!2014')
+print separamiles('12345678')
+raw_input("Cualquier tecla para salir:\n")
+exit()
